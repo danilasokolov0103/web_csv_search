@@ -1,0 +1,12 @@
+{% extends "upload.html" %}
+{% block content %}
+<h2>Поиск сотрудников</h2>
+<form  method="post" enctype="multipart/form-data"> {% csrf_token %}
+  
+  <input type="text" id="fname" name="fname" >
+  <label for="fname">First name:</label><br>
+  <input type="text" id="lname" name="lname" >
+  <label for="lname">Last name:</label><br>
+  <input type="submit" value="Find">
+</form>
+{% endblock %}
