@@ -6,16 +6,14 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 from . import import_csv,find_info 
+import shutil
 
 
 
 
 def index(request):
     context = {}
-    fs = FileSystemStorage()
-    files = fs.location
-    for f in files:
-        os.remove(f)
+
     if request.method == 'POST':
         if len(request.FILES) != 0:
             uploaded_file = request.FILES["csv_file"]
@@ -26,7 +24,7 @@ def index(request):
             else:
             
 
-                
+                fs = FileSystemStorage()
                 saved_file = fs.save(uploaded_file.name, uploaded_file)
                 filename = fs.path(uploaded_file.name)
                 print(filename)
