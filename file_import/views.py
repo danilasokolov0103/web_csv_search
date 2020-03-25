@@ -17,6 +17,7 @@ def index(request):
     if request.method == 'POST':
         if len(request.FILES) != 0:
             uploaded_file = request.FILES["csv_file"]
+            request.session['filename'] = uploaded_file.name
         
             if not uploaded_file.name.endswith('.csv'):
                 messages.error(request, 'THIS IS NOT A CSV FILE')
@@ -25,15 +26,16 @@ def index(request):
             
 
                 fs = FileSystemStorage()
+                
                 saved_file = fs.save(uploaded_file.name, uploaded_file)
                 filename = fs.path(uploaded_file.name)
                 print(filename)
                
                 filepath = fs.path(saved_file)
                 
-                messages.success(request,f'You chose file {filename}')
-                messages.success(request,'http//localhost:8000/find')
+                
                 request.session['data'] = import_csv.import_from_csv(filepath)
+                fs.delete(uploaded_file.name)
                 return HttpResponseRedirect('find/')
         return render(request, 'upload.html', context )
     return render(request, 'upload.html', context )      
@@ -42,7 +44,9 @@ def index(request):
 
 def find(request):
     context = {}
+    filename = request.session['filename']
     if request.method == 'POST':
+            
             fname = request.POST.get('fname',False)
             lname = request.POST.get('lname',False)
             print(fname)
@@ -50,9 +54,18 @@ def find(request):
             context['fname'] = fname
             context['lname'] = lname  
             employ = request.session['data']
+            
+            print(filename)
+            context['filename'] = filename
+
             context['info'] = find_info.show_info(employ,fname,lname)
-            for i in context['info']:
-                messages.success(request,i)
-    return render(request, 'find.html', context )
+            if len(context['info']) == 0:
+                context['info'] = 'Таких сотрудников нет'
+                messages.success(request,context['info'])
+            else:
+                for i in context['info']:
+                    messages.success(request,i)
+            return render(request, 'find.html', context = {'filename':filename,'fname':fname,'lname':lname})
+    return render(request, 'find.html',context = {'filename':filename})
         
 
