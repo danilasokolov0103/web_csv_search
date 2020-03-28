@@ -13,10 +13,11 @@
   </head>
   <body>
     <center>
-    <h2>Выберите csv.файл</h2>
+    <h2 style = "position:relative;  top: 110px;">Выберите csv.файл</h2>
     <form  method="post" enctype="multipart/form-data"> {% csrf_token %}
-      <input type="file" name="csv_file" />
-      <input type="submit" value="Импортировать">
+      <input style = "position:relative;  top: 150px;" type="file" name="csv_file" />
+      <input style = "position:relative;  top: 150px;" type="submit" value="Импортировать">
+ 
     </form>
     </center>
     <!-- Optional JavaScript -->

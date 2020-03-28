@@ -15,25 +15,31 @@
     <center><h2>Поиск сотрудников</h2>
     <form  method="post" enctype="multipart/form-data"> {% csrf_token %}
       
-      <input type="text" id="fname" name="fname" >
-      <label for="fname">First name</label><br>
+      <input style = "position:relative; left:-20px; " type="text" id="fname" name="fname" >
+      <label style = "position:relative; left:-20px; " for="fname" >Имя</label><br>
       <input type="text" id="lname" name="lname" >
-      <label for="lname">Last name</label><br>
-      <input type="submit" value="Find">
-      
+      <label for="lname">Фамилия</label><br>
+      <input style = "position:relative; left:-30px; " type="submit" value="Найти сотрудника"><br>
+    
     </form>
-    <h5>Выбранный файл : </h5>
-    <p>{{filename}}</p>
-    <input type="button" onclick="window.location.href = 'http://localhost:8000/';" value="Выбрать другой csv файл"/>
+  </center>
   
+    <h5  style = "position:relative; left:60px; top: -130px;"> Выбранный файл : {{filename}} </h5>
+    <input style = "position:relative; left:60px; top: -110px;" type="button" onclick="window.location.href = 'http://localhost:8000/';" value="Выбрать другой csv файл"/>
+    <center>
     <p>Результаты поиска по запросу: {{fname}} {{lname}}</p>
-    {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    
+  
+    {% if data %}
+    {% for employee in data %}
+      <p>{{employee}}</p>
     {% endfor %}
-</ul>
-{% endif %}
+    {% endif %}
+    {% if noresult %}
+      <p>{{noresult}}</p>
+    {% endif %}
+
+
     </center>
 
     <!-- Optional JavaScript -->
