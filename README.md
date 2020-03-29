@@ -18,7 +18,7 @@
 
 У вас должен быть установлен Docker 
 https://docs.docker.com/install/
-И docker-compose 
+и docker-compose 
 https://docs.docker.com/compose/install/
 
 Дальше нужно собрать docker-compose :
