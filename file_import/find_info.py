@@ -1,6 +1,5 @@
 
 
-
 def show_info(data_csv, first_name, second_name):
     first_name = (first_name.replace(" ", "")).capitalize()
     second_name = (second_name.replace(" ", "")).capitalize()
@@ -22,7 +21,7 @@ def show_info(data_csv, first_name, second_name):
             for value_pair_list in values_list:
                 print(keys + " - " +
                       value_pair_list[0]+' - ' + value_pair_list[1])
-                
+
                 data_list.append(
                     keys + " - " + value_pair_list[0]+' - ' + value_pair_list[1])
     else:

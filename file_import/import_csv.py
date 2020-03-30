@@ -1,6 +1,7 @@
 import csv
 import re
 
+
 def import_from_csv(file_path):
     result_data = {}
     if re.match(r'.*\.csv', file_path):
@@ -9,7 +10,7 @@ def import_from_csv(file_path):
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
                 if not row:
-                    
+
                     continue
                 else:
                     full_name = str(row[0])+' '+str(row[1])
@@ -22,8 +23,3 @@ def import_from_csv(file_path):
 
         print('Wrong file type')
         return ('Wrong file type')
-
-
-
-
-
